@@ -75,6 +75,12 @@ public class TitleSceneDirector : MonoBehaviour
         SceneManager.LoadScene("SelectScene");
     }
 
+    //チュートリアル
+    public void OnClickTutorial()
+    {
+        SceneManager.LoadScene("TutorialScene");
+    }
+
     //終了
     public void OnClickQuit()
     {
