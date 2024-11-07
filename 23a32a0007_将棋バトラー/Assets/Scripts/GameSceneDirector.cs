@@ -27,7 +27,8 @@ public class GameSceneDirector : MonoBehaviour
     [SerializeField]
     List<GameObject> prefabUnits;
 
-    //ボード配置
+    //ボード配置 ※2次元配列
+    //0→空、1→歩、2→角、3→飛車、4→香車、5→桂馬、6→銀、7→金、8→玉 ※相手側は+10
     int[,] boardSetting =
     {
         {4, 0, 1, 0, 0, 0,11, 0, 14},
@@ -129,6 +130,7 @@ public class GameSceneDirector : MonoBehaviour
         {
             for (int j = 0; j < boardHeight; j++)
             {
+                //生成位置
                 float x = i - boardWidth / 2;
                 float z = j - boardHeight / 2;
 
@@ -144,6 +146,7 @@ public class GameSceneDirector : MonoBehaviour
                 int type = boardSetting[i, j] % 10;
                 int player = boardSetting[i, j] / 10;
 
+                //空(0)はスキップ
                 if (0 == type) continue;
 
                 pos.y = 0.6f;
@@ -287,6 +290,7 @@ public class GameSceneDirector : MonoBehaviour
 
         units[tileidx.x, tileidx.y] = unit;
 
+        //もしボード上にあるなら移動元を更新する
         if (FieldStatus.OnBoard == unit.FieldStatus)
         {
             units[oldpos.x, oldpos.y] = null;
@@ -391,13 +395,16 @@ public class GameSceneDirector : MonoBehaviour
         //詰み判定
         if (1 > movablecount && isoute)
         {
-            textResultInfo.text = "詰み！！\n" + (GetNextPlayer(nowPlayer) + 1) + "Pの勝ち！";
+            //勝ったプレイヤー
+            int winPlayer = GetNextPlayer(nowPlayer) + 1;
+
+            textResultInfo.text = "詰み！！\n" + winPlayer + "Pの勝ち！";
             sound.PlaySE(1);
             sound.PlaySE(2);
             nextMode = Mode.Result;
 
             //勝敗カウントを増やす
-            if (GetNextPlayer(nowPlayer) + 1 == 1)
+            if (winPlayer == 1)
             {
                 TitleSceneDirector.winCount++;
             }
@@ -437,7 +444,7 @@ public class GameSceneDirector : MonoBehaviour
             {
                 //当たり判定のあるユニット
                 UnitController hitunit = hit.transform.GetComponent<UnitController>();
-                //持ち駒
+                //持ち駒選択
                 if (hitunit && FieldStatus.Captured == hitunit.FieldStatus)
                 {
                     unit = hitunit;
@@ -462,6 +469,7 @@ public class GameSceneDirector : MonoBehaviour
         //CPUの番
         if (isCpu)
         {
+            //待機時間消費
             if (0 < enemyWaitTimer)
             {
                 enemyWaitTimer -= Time.deltaTime;
@@ -512,10 +520,12 @@ public class GameSceneDirector : MonoBehaviour
         //次のプレイヤーのターン
         nowPlayer = GetNextPlayer(nowPlayer);
 
+        //ターン経過
         if (0 == nowPlayer)
         {
             turnCount++;
             textTurnCount.text = turnCount + "手目";
+            Debug.Log($"{turnCount}手目");
         }
 
         nextMode = Mode.Start;
@@ -584,7 +594,7 @@ public class GameSceneDirector : MonoBehaviour
         }
     }
 
-    //配列をコピー
+    //ボード配列をコピー
     public static UnitController[,] GetCopyArray(UnitController[,] ary)
     {
         UnitController[,] ret = new UnitController[9, 9];
@@ -616,11 +626,13 @@ public class GameSceneDirector : MonoBehaviour
         return ret;
     }
 
+    //成る
     public void OnClickEvolutionApply()
     {
         nextMode = Mode.TurnChange;
     }
 
+    //成らない
     public void OnClickEvolutionCancel()
     {
         selectUnit.Evolution(false);
@@ -645,11 +657,13 @@ public class GameSceneDirector : MonoBehaviour
         return ret;
     }
 
+    //再戦
     public void OnClickRestart()
     {
         SceneManager.LoadScene("GameScene");
     }
 
+    //タイトル
     public void OnClickTitle()
     {
         SceneManager.LoadScene("TitleScene");

@@ -32,6 +32,7 @@ public class UnitController : MonoBehaviour
     public UnitType UnitType, OldUnitType; //ユニットの種類
     public FieldStatus FieldStatus; //ユニットの場所
 
+    //そのユニットが何に成れるか
     Dictionary<UnitType, UnitType> evolutionTable = new Dictionary<UnitType, UnitType>
     {
         { UnitType.Hu, UnitType.Tokin }, { UnitType.Kaku, UnitType.Uma },

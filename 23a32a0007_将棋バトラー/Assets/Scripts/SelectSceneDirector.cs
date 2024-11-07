@@ -25,6 +25,7 @@ public class SelectSceneDirector : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    //–ß‚é
     public void OnClickBack()
     {
         SceneManager.LoadScene("TitleScene");

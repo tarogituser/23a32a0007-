@@ -66,8 +66,15 @@ public class TitleSceneDirector : MonoBehaviour
         }
     }
 
+    //開始
     public void OnClickStart()
     {
         SceneManager.LoadScene("SelectScene");
+    }
+
+    //終了
+    public void OnClickQuit()
+    {
+        Application.Quit();
     }
 }
