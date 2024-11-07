@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 1362423008}
   - component: {fileID: 1362423009}
   m_Layer: 0
-  m_Name: OpeningSceneDirector
+  m_Name: TutorialSceneDirector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -457,7 +457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textDialogInfo: {fileID: 1972323737}
-  buttonTitle: {fileID: 1949214175}
+  typingSpeed: 2
+  buttonTitle: {fileID: 1949214173}
   prefabTile: {fileID: 4453956942526840237, guid: 3ddffa0a69cce5444855b2cdefced44e, type: 3}
   prefabUnits:
   - {fileID: 4639641935196879289, guid: 11c44dcc046b844f4a9edc1ca4830146, type: 3}
@@ -631,7 +632,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 400, y: -200}
-  m_SizeDelta: {x: 180, y: 60}
+  m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949214175
 MonoBehaviour:
@@ -1016,7 +1017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1025,7 +1026,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 28
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

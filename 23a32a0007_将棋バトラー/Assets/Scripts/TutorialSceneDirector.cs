@@ -15,7 +15,7 @@ public class TutorialSceneDirector : MonoBehaviour
     float typingSpeed;
 
     [SerializeField]
-    Button buttonTitle;
+    GameObject buttonTitle;
 
     const int PlayerMax = 2;
     //将棋盤の幅と高さ
@@ -28,6 +28,7 @@ public class TutorialSceneDirector : MonoBehaviour
     List<GameObject> prefabUnits;
 
     //ボード配置 ※2次元配列
+    //0→空、1→歩、2→角、3→飛車、4→香車、5→桂馬、6→銀、7→金、8→玉
     int[,] boardSetting =
     {
         {4, 0, 1, 0, 0, 0, 0, 0, 0},
@@ -50,7 +51,7 @@ public class TutorialSceneDirector : MonoBehaviour
     //移動関連
     Dictionary<GameObject, Vector2Int> movableTiles;
 
-    [SerializeField, Header("青カーソル")]
+    [SerializeField, Header("カーソル")]
     GameObject prefabCursor;
 
     List<GameObject> cursors;
@@ -77,7 +78,7 @@ public class TutorialSceneDirector : MonoBehaviour
     {
         sound.PlayBGM();
         //初期化
-        buttonTitle.gameObject.SetActive(false);
+        buttonTitle.SetActive(false);
         textDialogInfo.text = "";
 
         boardWidth = 9;
@@ -141,11 +142,11 @@ public class TutorialSceneDirector : MonoBehaviour
             }
         }
 
-        StartCoroutine(StartTutorial());
+        StartCoroutine(Tutorial());
     }
 
-    //チュートリアル開始
-    IEnumerator StartTutorial()
+    //チュートリアル
+    IEnumerator Tutorial()
     {
         for (int i = 0; i < dialogs.Count; i++)
         {
@@ -170,14 +171,14 @@ public class TutorialSceneDirector : MonoBehaviour
 
             yield return new WaitForSeconds(2);
         }
-
+        //チュートリアル終了
         isTeaching = false;
 
         yield return new WaitForSeconds(14);
 
         textDialogInfo.text = "では、健闘を祈る！";
         sound.PlaySE(1);
-        buttonTitle.gameObject.SetActive(true);
+        buttonTitle.SetActive(true);
     }
 
     // Update is called once per frame
@@ -208,9 +209,7 @@ public class TutorialSceneDirector : MonoBehaviour
             }
         }
 
-        //選択されていない&ゲーム説明中なら処理しない
-        if (!tile && !unit) return;
-
+        //チュートリアル中は処理しない
         if (isTeaching) return;
 
         //移動先選択
@@ -222,8 +221,7 @@ public class TutorialSceneDirector : MonoBehaviour
         //ユニット選択
         if (unit)
         {
-            bool isPlayer = 0 == unit.PlayerNum;
-            SetSelectCursors(unit, isPlayer);
+            SetSelectCursors(unit);
         }
     }
 
@@ -280,6 +278,7 @@ public class TutorialSceneDirector : MonoBehaviour
 
         units[tileidx.x, tileidx.y] = unit;
 
+        //ボード上にあるなら移動元を更新
         if (FieldStatus.OnBoard == unit.FieldStatus)
         {
             units[oldpos.x, oldpos.y] = null;
