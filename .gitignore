@@ -75,3 +75,4 @@ crashlytics-build.properties
 23a32a0007_将棋バトラー/Library/
 23a32a0007_将棋バトラー/Logs/
 23a32a0007_将棋バトラー/.vsconfig
+*.cache
