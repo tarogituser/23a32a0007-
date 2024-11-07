@@ -35,8 +35,8 @@ public class TitleSceneDirector : MonoBehaviour
     void Start()
     {
         //勝敗数表示
-        textWinCount.text = "勝利数:" + winCount + "勝";
-        textLoseCount.text = "敗北数:" + loseCount + "敗";
+        textWinCount.text = "現在の勝利数:" + winCount + "勝";
+        textLoseCount.text = "現在の敗北数:" + loseCount + "敗";
 
         int boardWidth = 9, boardHeight = 9;
 
