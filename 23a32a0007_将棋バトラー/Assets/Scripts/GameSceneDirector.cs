@@ -60,7 +60,7 @@ public class GameSceneDirector : MonoBehaviour
     //プレイ中のプレイヤー・ターン数
     int nowPlayer, turnCount;
 
-    //ゲームモード
+    //ゲームモード定義
     enum Mode
     {
         None,
@@ -155,7 +155,7 @@ public class GameSceneDirector : MonoBehaviour
                 GameObject prefab = prefabUnits[type - 1];
                 GameObject unit = Instantiate(prefab, pos, Quaternion.Euler(90, player * 180, 0));
 
-                //UnitController取得
+                //UnitControllerを取得して初期化
                 UnitController unitctrl = unit.AddComponent<UnitController>();
                 unitctrl.Init(player, type, tile, idx);
 

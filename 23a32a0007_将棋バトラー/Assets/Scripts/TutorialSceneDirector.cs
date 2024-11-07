@@ -70,7 +70,7 @@ public class TutorialSceneDirector : MonoBehaviour
     [SerializeField, Header("BGM&SE制御")]
     SoundController sound;
 
-    //ゲーム説明中フラグ
+    //チュートリアル中フラグ
     bool isTeaching = true;
 
     // Start is called before the first frame update
@@ -94,6 +94,7 @@ public class TutorialSceneDirector : MonoBehaviour
         {
             for (int j = 0; j < boardHeight; j++)
             {
+                //生成位置
                 float x = i - boardWidth / 2;
                 float z = j - boardHeight / 2;
 
@@ -109,6 +110,7 @@ public class TutorialSceneDirector : MonoBehaviour
                 int type = boardSetting[i, j] % 10;
                 int player = boardSetting[i, j] / 10;
 
+                //空(0)はスキップ
                 if (0 == type) continue;
 
                 pos.y = 0.6f;
@@ -295,6 +297,7 @@ public class TutorialSceneDirector : MonoBehaviour
         sound.PlaySE(0);
     }
 
+    //タイトル
     public void OnClickTitle()
     {
         SceneManager.LoadScene("TitleScene");
