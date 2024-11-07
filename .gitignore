@@ -76,3 +76,5 @@ crashlytics-build.properties
 23a32a0007_将棋バトラー/Logs/
 23a32a0007_将棋バトラー/.vsconfig
 *.cache
+23a32a0007_将棋バトラー/ビルドファイル/UnityPlayer.dll
+23a32a0007_将棋バトラー/ビルドファイル/UnityCrashHandler64.exe
