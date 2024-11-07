@@ -9,15 +9,10 @@ public class SoundController : MonoBehaviour
 
     AudioSource audioSource;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
     //BGMçƒê∂
     public void PlayBGM()
     {
+        audioSource = GetComponent<AudioSource>();
         audioSource.clip = bgm[0];
         audioSource.Play();
     }

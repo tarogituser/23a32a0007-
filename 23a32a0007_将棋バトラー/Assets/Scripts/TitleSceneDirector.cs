@@ -8,6 +8,7 @@ public class TitleSceneDirector : MonoBehaviour
     [SerializeField]
     Text textWinCount, textLoseCount;
 
+    //勝敗カウント
     public static int winCount, loseCount;
 
     [SerializeField, Header("タイルのプレハブ")]
@@ -16,7 +17,7 @@ public class TitleSceneDirector : MonoBehaviour
     [SerializeField]
     List<GameObject> prefabUnits;
 
-    //ボード配置
+    //ボード配置 ※2次元配列
     int[,] boardSetting =
     {
         {4, 0, 1, 0, 0, 0,11, 0, 14},
@@ -44,6 +45,7 @@ public class TitleSceneDirector : MonoBehaviour
         {
             for (int j = 0; j < boardHeight; j++)
             {
+                //生成位置
                 float x = i - boardWidth / 2;
                 float z = j - boardHeight / 2;
 
@@ -56,6 +58,7 @@ public class TitleSceneDirector : MonoBehaviour
                 int type = boardSetting[i, j] % 10;
                 int player = boardSetting[i, j] / 10;
 
+                //空(0)はスキップ
                 if (0 == type) continue;
 
                 pos.y = 0.6f;
