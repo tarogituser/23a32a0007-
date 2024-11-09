@@ -636,7 +636,7 @@ public class GameSceneDirector : MonoBehaviour
     public void OnClickEvolutionCancel()
     {
         selectUnit.Evolution(false);
-        OnClickEvolutionApply();
+        nextMode = Mode.TurnChange;
     }
 
     //全ユニット取得
@@ -658,7 +658,7 @@ public class GameSceneDirector : MonoBehaviour
     }
 
     //再戦
-    public void OnClickRestart()
+    public void OnClickRematch()
     {
         SceneManager.LoadScene("GameScene");
     }
