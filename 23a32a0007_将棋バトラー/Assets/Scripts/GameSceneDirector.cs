@@ -265,6 +265,9 @@ public class GameSceneDirector : MonoBehaviour
             Vector3 pos = tiles[item].transform.position;
             pos.y += 0.51f;
             GameObject cursor = Instantiate(prefabCursor, pos, Quaternion.identity);
+            //カーソルの色を変更(自陣→青、敵陣→赤)
+            cursor.GetComponent<MeshRenderer>().material.color
+                = (0 == unit.PlayerNum) ? Color.blue : Color.red;
             cursors.Add(cursor);
         }
 
